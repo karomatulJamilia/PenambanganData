@@ -1,11 +1,11 @@
-# Welcome to your Jupyter Book
+# 240411100116 Karomatul Jamilia
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Welcome to my notebook and course documentation for the Data Mining class.
+This repository contains a summary of the materials I have learned throughout the course, including key concepts, modeling stages, and practical examples. The content is published in the form of web-based documentation to make it easier to read and use as both a personal learning reference and a resource for anyone interested in exploring data mining further.
 
-Check out the content pages bundled with this sample book to see more.
 
-```{tableofcontents}
-```
+**Identitas:**
+- Nama : Karomatul Jamilia
+- NIM  : 240411100116
+- Prodi: Teknik Informatika
+- Email: karomatuljamilia99@gmail.com
