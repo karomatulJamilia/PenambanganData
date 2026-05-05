@@ -127,6 +127,9 @@ Dalam tugas ini, dataset digunakan dengan dua pendekatan:
 ## 4. Proses Perhitungan
 
 ### 4.1 Perhitungan Menggunakan Excel
+![original image](https://cdn.mathpix.com/snip/images/Laq0eDX28YR4DYpJbPX98-fY0IASsEcqkH1TpZUDkrY.original.fullsize.png)
+
+![original image](https://cdn.mathpix.com/snip/images/42P6ZSQOKaq9kuoCT9PE8idduG70L-BuqE0IZ0Pen5Q.original.fullsize.png)
 
 #### 4.1.1 Menghitung Probabilitas Prior
 $$
