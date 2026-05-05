@@ -4,6 +4,8 @@
 Naive Bayes adalah metode klasifikasi berbasis probabilitas yang menggunakan konsep dari Teorema Bayes. Metode ini mengasumsikan bahwa setiap fitur bersifat independen terhadap fitur lainnya.
 
 **Rumus Naive Bayes**
+
+
 $P(C_i \mid X) = \frac{P(X \mid C_i) \cdot P(C_i)}{P(X)}$
 
 **Keterangan:**
@@ -21,9 +23,11 @@ $P(C_i \mid X) = \frac{P(X \mid C_i) \cdot P(C_i)}{P(X)}$
 Digunakan untuk **data numerik (kontinu)** dan mengasumsikan data berdistribusi normal (Gaussian).
 
 **Rumus**
-$$
+
+$
 P(x \mid C_i) = \frac{1}{\sqrt{2\pi\sigma_i^2}} \exp\left(-\frac{(x - \mu_i)^2}{2\sigma_i^2}\right)
-$$
+$
+
 
 **Keterangan**
 - $\mu_i$ : rata-rata (mean)  
@@ -35,9 +39,11 @@ $$
 Digunakan untuk **data frekuensi (count)**.
 
 **Rumus**
-$$
+
+
+$
 P(x_j \mid C_i) = \frac{\text{count}(x_j, C_i)}{\sum_k \text{count}(x_k, C_i)}
-$$
+$
 
 
 
@@ -45,9 +51,11 @@ $$
 Digunakan untuk **data biner (0/1)**.
 
 **Rumus**
-$$
+
+
+$
 P(x_j \mid C_i) = p^{x_j} (1 - p)^{(1 - x_j)}
-$$
+$
 
 
 
@@ -55,9 +63,11 @@ $$
 Digunakan untuk dataset tidak seimbang.
 
 **Rumus**
-$$
+
+
+$
 \hat{\theta}_{ci} = \frac{\alpha + \sum_{j:y_j \neq c} d_{ij}}{\alpha n + \sum_{j:y_j \neq c} \sum_k d_{kj}}
-$$
+$
 
 
 
@@ -65,9 +75,11 @@ $$
 Digunakan untuk **data kategorikal**.
 
 **Rumus**
-$$
+
+
+$
 P(x_j \mid C_i) = \frac{N_{x_j,C_i} + \alpha}{N_{C_i} + \alpha \cdot n}
-$$
+$
 
 
 
@@ -126,11 +138,15 @@ $$
 #### 4.1.2 Menghitung Probabilitas Likelihood
 
 a. Untuk data kategorikal/biner:
+
+
 $$
 P(x_j \mid C_i) = \frac{\text{jumlah kemunculan } x_j \text{ pada } C_i}{\text{jumlah data pada } C_i}
 $$
 
 b. Untuk data numerik (Gaussian):
+
+
 $$
 P(x \mid C_i) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)
 $$
@@ -138,18 +154,24 @@ $$
 
 
 #### 4.1.3 Menghitung Likelihood Gabungan
+
+
 $$
 P(X \mid C_i) = \prod_{j=1}^{n} P(x_j \mid C_i)
 $$
 
 Contoh:
-$$
+
+
+$
 P(X \mid Male) = P(long\_hair|Male) \times P(forehead\_width|Male) \times P(forehead\_height|Male) \times P(nose\_wide|Male)
-$$
+$
 
 
 
 #### 4.1.4 Menghitung Posterior
+
+
 $$
 P(X \mid C_i) \cdot P(C_i)
 $$
@@ -157,6 +179,8 @@ $$
 
 
 #### 4.1.5 Menentukan Hasil Klasifikasi
+
+
 $$
 \hat{C} = \arg\max_{C_i} \left[ P(C_i) \cdot P(X \mid C_i) \right]
 $$
