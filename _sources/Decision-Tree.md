@@ -1,4 +1,5 @@
-# Analisis Data Menggunakan Algoritma Decision Tree dengan Metode Gain Ratio pada KNIME
+# Decision Tree 
+## Analisis Data Menggunakan Algoritma Decision Tree dengan Metode Gain Ratio pada KNIME
 
 
 Tugas ini bertujuan untuk melakukan analisis data menggunakan metode Pohon Keputusan (Decision Tree) untuk membangun model klasifikasi. Model ini digunakan untuk memprediksi atau menentukan kelas dari suatu data, misalnya menentukan apakah suatu mobil layak dibeli atau tidak berdasarkan atribut-atributnya.
