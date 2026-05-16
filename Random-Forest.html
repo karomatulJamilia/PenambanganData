@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Analisis Data Menggunakan Random Forest &#8212; My sample book</title>
+    <title>Random Forest &#8212; My sample book</title>
   
   
   
@@ -173,16 +173,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Data-Preparation.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modelling.html">Modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Deployment.html">Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Missing-Values-Imputation.html">1. Missing Value Imputation dengan WKNN</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="Missing-Values-Imputation.html">Missing Value Imputation dengan WKNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="UTS.html">UTS Penambangan Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Analisis-Data-Menggunakan-Naive-Bayes.html">Analisis Data Menggunakan Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Decision-Tree.html">Decision Tree</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Data Menggunakan Random Forest</a></li>
-
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Random Forest</a></li>
 </ul>
 
     </div>
@@ -365,7 +360,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Analisis Data Menggunakan Random Forest</h1>
+    <h1>Random Forest</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -375,25 +370,24 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Analisis Data Menggunakan Random Forest</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-algoritma">1. Penjelasan Algoritma</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">1.1 Decision Tree</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">1.2 Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-data-menggunakan-random-forest">Analisis Data Menggunakan Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-algoritma">1. Penjelasan Algoritma</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">1.1 Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.2 Random Forest</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2. Dataset</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">3. Workflow KNIME</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-decision-tree">3.1 Workflow Decision Tree</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-random-forest-dengan-python-script">3.2 Workflow Random Forest dengan Python Script</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-1-training-dan-save-model">3.2.1 Python Script 1 (Training dan Save Model)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-2-load-model-dan-testing">3.2.2 Python Script 2 (Load Model dan Testing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2. Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">3. Workflow KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-decision-tree">3.1 Workflow Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-random-forest-dengan-python-script">3.2 Workflow Random Forest dengan Python Script</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-1-training-dan-save-model">3.2.1 Python Script 1 (Training dan Save Model)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-2-load-model-dan-testing">3.2.2 Python Script 2 (Load Model dan Testing)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-penggunaan-decision-tree-dan-random-forest">4. Perbandingan Penggunaan Decision Tree dan Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-penggunaan-decision-tree-dan-random-forest">4. Perbandingan Penggunaan Decision Tree dan Random Forest</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -404,19 +398,21 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="analisis-data-menggunakan-random-forest">
-<h1>Analisis Data Menggunakan Random Forest<a class="headerlink" href="#analisis-data-menggunakan-random-forest" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="random-forest">
+<h1>Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h1>
+<section id="analisis-data-menggunakan-random-forest">
+<h2>Analisis Data Menggunakan Random Forest<a class="headerlink" href="#analisis-data-menggunakan-random-forest" title="Link to this heading">#</a></h2>
 <p>Pada tugas ini dilakukan analisis data menggunakan metode Decision Tree dan Random Forest pada dataset diabetes. Tujuannya adalah membandingkan performa kedua algoritma dalam melakukan klasifikasi data diabetes berdasarkan nilai akurasi yang dihasilkan.</p>
 </section>
 <section id="penjelasan-algoritma">
-<h1>1. Penjelasan Algoritma<a class="headerlink" href="#penjelasan-algoritma" title="Link to this heading">#</a></h1>
+<h2>1. Penjelasan Algoritma<a class="headerlink" href="#penjelasan-algoritma" title="Link to this heading">#</a></h2>
 <section id="decision-tree">
-<h2>1.1 Decision Tree<a class="headerlink" href="#decision-tree" title="Link to this heading">#</a></h2>
+<h3>1.1 Decision Tree<a class="headerlink" href="#decision-tree" title="Link to this heading">#</a></h3>
 <p>Decision Tree adalah algoritma machine learning berbentuk pohon keputusan yang digunakan untuk klasifikasi maupun prediksi.
 Algoritma ini bekerja dengan membagi data berdasarkan atribut tertentu hingga menghasilkan keputusan akhir.</p>
 </section>
-<section id="random-forest">
-<h2>1.2 Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>1.2 Random Forest<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Random Forest merupakan pengembangan dari Decision Tree yang menggunakan banyak pohon keputusan (tree).
 Hasil prediksi diperoleh dari voting seluruh tree sehingga hasil lebih stabil dan akurat.</p>
 <p><strong>Cara kerja Random Forest</strong></p>
@@ -429,15 +425,15 @@ Hasil prediksi diperoleh dari voting seluruh tree sehingga hasil lebih stabil da
 </section>
 </section>
 <section id="dataset">
-<h1>2. Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h1>
+<h2>2. Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
 <p>Dataset yang digunakan pada penelitian ini adalah dataset Pima Indians Diabetes Database yang diperoleh dari Kaggle. Dataset ini berasal dari National Institute of Diabetes and Digestive and Kidney Diseases dan digunakan untuk memprediksi apakah seorang pasien menderita diabetes atau tidak berdasarkan beberapa pengukuran medis. Dataset ini sangat populer dalam bidang Machine Learning karena sering digunakan untuk klasifikasi data kesehatan dan pengujian algoritma machine learning.</p>
 <p>Dataset ini berisi data pasien perempuan keturunan Pima Indian yang berusia minimal 21 tahun. Tujuan utama dari dataset ini adalah melakukan prediksi diabetes menggunakan beberapa atribut kesehatan seperti kadar glukosa, tekanan darah, BMI, insulin, dan usia pasien.</p>
 <p><a class="reference external" href="https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database">https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database</a></p>
 </section>
 <section id="workflow-knime">
-<h1>3. Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h1>
+<h2>3. Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h2>
 <section id="workflow-decision-tree">
-<h2>3.1 Workflow Decision Tree<a class="headerlink" href="#workflow-decision-tree" title="Link to this heading">#</a></h2>
+<h3>3.1 Workflow Decision Tree<a class="headerlink" href="#workflow-decision-tree" title="Link to this heading">#</a></h3>
 <p><img alt="original image" src="https://cdn.mathpix.com/snip/images/NmHIsJZ4amDo9KlS3Owr8JejYYL5tfW0Ak-oNZEkdFI.original.fullsize.png" /></p>
 <ul class="simple">
 <li><p>Node CSV Reader digunakan untuk membaca dataset diabetes yang berbentuk file .csv.</p></li>
@@ -450,10 +446,10 @@ Hasil prediksi diperoleh dari voting seluruh tree sehingga hasil lebih stabil da
 </ul>
 </section>
 <section id="workflow-random-forest-dengan-python-script">
-<h2>3.2 Workflow Random Forest dengan Python Script<a class="headerlink" href="#workflow-random-forest-dengan-python-script" title="Link to this heading">#</a></h2>
+<h3>3.2 Workflow Random Forest dengan Python Script<a class="headerlink" href="#workflow-random-forest-dengan-python-script" title="Link to this heading">#</a></h3>
 <p><img alt="original image" src="https://cdn.mathpix.com/snip/images/9mGWzxwGErt6UvK0ZKvxXcx6LDxr-Bg1IEolafn43NQ.original.fullsize.png" /></p>
 <section id="python-script-1-training-dan-save-model">
-<h3>3.2.1 Python Script 1 (Training dan Save Model)<a class="headerlink" href="#python-script-1-training-dan-save-model" title="Link to this heading">#</a></h3>
+<h4>3.2.1 Python Script 1 (Training dan Save Model)<a class="headerlink" href="#python-script-1-training-dan-save-model" title="Link to this heading">#</a></h4>
 <p><strong>Script Python 1 :</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
@@ -488,7 +484,7 @@ Hasil prediksi diperoleh dari voting seluruh tree sehingga hasil lebih stabil da
 <p>Python Script 1 berfungsi sebagai proses training model Random Forest menggunakan data training yang berasal dari node Table Partitioner. Pada script ini data dipisahkan menjadi fitur dan target (Outcome), kemudian model Random Forest dibuat menggunakan library scikit-learn dengan jumlah 100 decision tree. Setelah model selesai dilatih menggunakan data training, model tersebut disimpan ke dalam file berformat .pkl menggunakan library joblib. File .pkl ini nantinya digunakan kembali pada proses testing di Python Script 2. Dengan demikian Python Script 1 memiliki fungsi utama sebagai proses pembuatan, pelatihan, dan penyimpanan model machine learning.</p>
 </section>
 <section id="python-script-2-load-model-dan-testing">
-<h3>3.2.2 Python Script 2 (Load Model dan Testing)<a class="headerlink" href="#python-script-2-load-model-dan-testing" title="Link to this heading">#</a></h3>
+<h4>3.2.2 Python Script 2 (Load Model dan Testing)<a class="headerlink" href="#python-script-2-load-model-dan-testing" title="Link to this heading">#</a></h4>
 <p><strong>Script Python 2 :</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
@@ -526,7 +522,7 @@ Hasil prediksi diperoleh dari voting seluruh tree sehingga hasil lebih stabil da
 </section>
 </section>
 <section id="perbandingan-penggunaan-decision-tree-dan-random-forest">
-<h1>4. Perbandingan Penggunaan Decision Tree dan Random Forest<a class="headerlink" href="#perbandingan-penggunaan-decision-tree-dan-random-forest" title="Link to this heading">#</a></h1>
+<h2>4. Perbandingan Penggunaan Decision Tree dan Random Forest<a class="headerlink" href="#perbandingan-penggunaan-decision-tree-dan-random-forest" title="Link to this heading">#</a></h2>
 <p><strong>Scorer Decision Tree</strong>
 <img alt="original image" src="https://cdn.mathpix.com/snip/images/voZ8XQgj1xJhVQxzZLIvGjmI0tMtuqPmEyoVVqtRkQ4.original.fullsize.png" /></p>
 <p>Berdasarkan hasil node Scorer, metode Decision Tree menghasilkan nilai accuracy sebesar 0.708 .</p>
@@ -603,6 +599,7 @@ Hasil prediksi diperoleh dari voting seluruh tree sehingga hasil lebih stabil da
 </div>
 <p>Berdasarkan hasil pengujian dapat disimpulkan bahwa metode Random Forest menghasilkan accuracy lebih tinggi dibandingkan Decision Tree. Selisih accuracy memang tidak terlalu besar, namun Random Forest menghasilkan prediksi yang lebih stabil karena menggunakan kombinasi banyak pohon keputusan (tree). Oleh karena itu Random Forest lebih baik digunakan untuk proses klasifikasi dataset diabetes dibandingkan Decision Tree tunggal.</p>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -661,25 +658,24 @@ Hasil prediksi diperoleh dari voting seluruh tree sehingga hasil lebih stabil da
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Analisis Data Menggunakan Random Forest</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-algoritma">1. Penjelasan Algoritma</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">1.1 Decision Tree</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">1.2 Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-data-menggunakan-random-forest">Analisis Data Menggunakan Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-algoritma">1. Penjelasan Algoritma</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">1.1 Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.2 Random Forest</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2. Dataset</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">3. Workflow KNIME</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-decision-tree">3.1 Workflow Decision Tree</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-random-forest-dengan-python-script">3.2 Workflow Random Forest dengan Python Script</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-1-training-dan-save-model">3.2.1 Python Script 1 (Training dan Save Model)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-2-load-model-dan-testing">3.2.2 Python Script 2 (Load Model dan Testing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2. Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">3. Workflow KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-decision-tree">3.1 Workflow Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-random-forest-dengan-python-script">3.2 Workflow Random Forest dengan Python Script</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-1-training-dan-save-model">3.2.1 Python Script 1 (Training dan Save Model)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-2-load-model-dan-testing">3.2.2 Python Script 2 (Load Model dan Testing)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-penggunaan-decision-tree-dan-random-forest">4. Perbandingan Penggunaan Decision Tree dan Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-penggunaan-decision-tree-dan-random-forest">4. Perbandingan Penggunaan Decision Tree dan Random Forest</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

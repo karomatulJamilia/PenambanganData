@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Missing Value Imputation dengan WKNN &#8212; My sample book</title>
+    <title>Missing Value Imputation dengan WKNN &#8212; My sample book</title>
   
   
   
@@ -176,10 +176,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Data-Preparation.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modelling.html">Modelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Deployment.html">Deployment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="Missing-Values-Imputation.html"> Missing Value Imputation dengan WKNN</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Missing Value Imputation dengan WKNN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="UTS.html">UTS Penambangan Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Analisis-Data-Menggunakan-Naive-Bayes.html">Analisis Data Menggunakan Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Decision-Tree.html">Decision Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Random-Forest.html">Random Forest</a></li>
 </ul>
 
     </div>
@@ -362,7 +363,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1> Missing Value Imputation dengan WKNN</h1>
+    <h1>Missing Value Imputation dengan WKNN</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,61 +373,60 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Missing Value Imputation dengan WKNN</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-metode-wknn">Langkah-langkah metode WKNN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-similarity-pada-wknn">Rumus Similarity pada WKNN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-simbol">Keterangan simbol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-perhitungan-nilai-imputasi">Rumus Perhitungan Nilai Imputasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Keterangan simbol</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-yang-digunakan">Dataset yang digunakan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kolom-pada-dataset">Penjelasan Kolom pada Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Missing Value Imputation dengan WKNN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-metode-wknn">Langkah-langkah metode WKNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-similarity-pada-wknn">Rumus Similarity pada WKNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-simbol">Keterangan simbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-perhitungan-nilai-imputasi">Rumus Perhitungan Nilai Imputasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Keterangan simbol</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-yang-digunakan">Dataset yang digunakan</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kolom-pada-dataset">Penjelasan Kolom pada Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-manual">1.1. Perhitungan WKNN Manual</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-data-yang-memiliki-missing-value">1.1.1 Menentukan Data yang Memiliki Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kolom-yang-akan-dinormalisasi">1.1.2  Menentukan Kolom yang Akan Dinormalisasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melakukan-normalisasi-data">1.1.3 Melakukan Normalisasi Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-similarity-si">1.1.4 Menghitung Similarity (Si)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut-si">1.1.5 Menghitung Penyebut (ΣSi)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang-si-yjh">1.1.6 Menghitung Pembilang (Si × Yjh)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-nilai-imputasi">1.1.7 Hasil Nilai Imputasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-manual">1.1. Perhitungan WKNN Manual</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-data-yang-memiliki-missing-value">1.1.1 Menentukan Data yang Memiliki Missing Value</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kolom-yang-akan-dinormalisasi">1.1.2  Menentukan Kolom yang Akan Dinormalisasi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#melakukan-normalisasi-data">1.1.3 Melakukan Normalisasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-similarity-si">1.1.4 Menghitung Similarity (Si)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut-si">1.1.5 Menghitung Penyebut (ΣSi)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang-si-yjh">1.1.6 Menghitung Pembilang (Si × Yjh)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-nilai-imputasi">1.1.7 Hasil Nilai Imputasi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-menggunakan-python">1.2 Perhitungan WKNN menggunakan Python</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengunggah-dan-membaca-dataset">1. Mengunggah dan Membaca Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.Menentukan Kolom yang Akan Dinormalisasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. Melakukan Normalisasi Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. Menentukan Data yang Memiliki Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-similarity-si">5. Menghitung Nilai Similarity (Si)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut">6. Menghitung Penyebut</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang">7. Menghitung Pembilang</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-imputasi">8. Menghitung Nilai Imputasi</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">2. Normalisasi data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macam-macam-normalisasi-data">2.1 Macam-macam Normalisasi Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minmax-normalization">1. MinMax Normalization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization">2. Z-Score Normalization</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-rata-rata">Menghitung Rata-rata</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-standar-deviasi">Menghitung Standar Deviasi</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-normalization">3. Decimal Scaling Normalization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-menggunakan-sk-learn">2.2 Normalisasi Data Menggunakan SK_Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-awal">Data Awal</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization-menggunakan-sklearn">1. Min-Max Normalization menggunakan sklearn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization-menggunakan-sklearn">2. Z-Score Normalization menggunakan sklearn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-menggunakan-python">3. Decimal Scaling menggunakan Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-menggunakan-python">1.2 Perhitungan WKNN menggunakan Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mengunggah-dan-membaca-dataset">1. Mengunggah dan Membaca Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.Menentukan Kolom yang Akan Dinormalisasi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. Melakukan Normalisasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4. Menentukan Data yang Memiliki Missing Value</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-similarity-si">5. Menghitung Nilai Similarity (Si)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut">6. Menghitung Penyebut</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang">7. Menghitung Pembilang</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-imputasi">8. Menghitung Nilai Imputasi</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">2. Normalisasi data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macam-macam-normalisasi-data">2.1 Macam-macam Normalisasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#minmax-normalization">1. MinMax Normalization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization">2. Z-Score Normalization</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-rata-rata">Menghitung Rata-rata</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-standar-deviasi">Menghitung Standar Deviasi</a></li>
 </ul>
-
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-normalization">3. Decimal Scaling Normalization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-menggunakan-sk-learn">2.2 Normalisasi Data Menggunakan SK_Learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-awal">Data Awal</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization-menggunakan-sklearn">1. Min-Max Normalization menggunakan sklearn</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization-menggunakan-sklearn">2. Z-Score Normalization menggunakan sklearn</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-menggunakan-python">3. Decimal Scaling menggunakan Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -437,13 +437,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="missing-value-imputation-dengan-wknn">
-<h1>1. Missing Value Imputation dengan WKNN<a class="headerlink" href="#missing-value-imputation-dengan-wknn" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="missing-value-imputation-dengan-wknn">
+<h1>Missing Value Imputation dengan WKNN<a class="headerlink" href="#missing-value-imputation-dengan-wknn" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>1. Missing Value Imputation dengan WKNN<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>Dalam proses pengolahan data, sering ditemukan data yang tidak lengkap atau <em>missing value</em>. Missing value dapat mempengaruhi hasil analisis karena informasi yang dibutuhkan tidak tersedia secara lengkap. Oleh karena itu diperlukan metode untuk mengisi nilai yang hilang tersebut.</p>
 <p>Salah satu metode yang dapat digunakan adalah <strong>Weighted K-Nearest Neighbor Imputation (WKNN)</strong>. Metode ini merupakan pengembangan dari metode K-Nearest Neighbor yang digunakan untuk mengisi nilai yang hilang dengan mempertimbangkan kedekatan antar data serta memberikan bobot pada tetangga terdekat.</p>
 <p>Pada metode WKNN, data yang memiliki missing value akan dibandingkan dengan data lain yang lengkap. Kemudian dihitung jarak atau kemiripan antara data tersebut. Nilai yang hilang akan diperkirakan menggunakan nilai dari beberapa data yang paling mirip dengan mempertimbangkan bobot dari masing-masing tetangga.</p>
 <section id="langkah-langkah-metode-wknn">
-<h2>Langkah-langkah metode WKNN<a class="headerlink" href="#langkah-langkah-metode-wknn" title="Link to this heading">#</a></h2>
+<h3>Langkah-langkah metode WKNN<a class="headerlink" href="#langkah-langkah-metode-wknn" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Menentukan data yang memiliki missing value.</p></li>
 <li><p>Menghitung jarak atau kemiripan antara data yang memiliki missing value dengan data lainnya.</p></li>
@@ -453,7 +455,7 @@
 </ol>
 </section>
 <section id="rumus-similarity-pada-wknn">
-<h2>Rumus Similarity pada WKNN<a class="headerlink" href="#rumus-similarity-pada-wknn" title="Link to this heading">#</a></h2>
+<h3>Rumus Similarity pada WKNN<a class="headerlink" href="#rumus-similarity-pada-wknn" title="Link to this heading">#</a></h3>
 <p>Nilai similarity dihitung menggunakan rumus berikut:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -461,7 +463,7 @@ S_i = \frac{1}{\sum (Y_{ih} - Y_{jh})^2}
 \]</div>
 </section>
 <section id="keterangan-simbol">
-<h2>Keterangan simbol<a class="headerlink" href="#keterangan-simbol" title="Link to this heading">#</a></h2>
+<h3>Keterangan simbol<a class="headerlink" href="#keterangan-simbol" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -472,7 +474,7 @@ Y_{jh} &amp;= \text{nilai atribut ke-}h \text{ pada data } j
 \end{split}\]</div>
 </section>
 <section id="rumus-perhitungan-nilai-imputasi">
-<h2>Rumus Perhitungan Nilai Imputasi<a class="headerlink" href="#rumus-perhitungan-nilai-imputasi" title="Link to this heading">#</a></h2>
+<h3>Rumus Perhitungan Nilai Imputasi<a class="headerlink" href="#rumus-perhitungan-nilai-imputasi" title="Link to this heading">#</a></h3>
 <p>Setelah nilai similarity diperoleh, nilai imputasi dihitung menggunakan rata-rata berbobot sebagai berikut:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -481,8 +483,8 @@ Y_{jh} &amp;= \text{nilai atribut ke-}h \text{ pada data } j
 {\sum_{j \in IK_{ih}} s_i(y_j)}
 \]</div>
 </section>
-<section id="id1">
-<h2>Keterangan simbol<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>Keterangan simbol<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -494,13 +496,13 @@ y_{jh} &amp;= \text{nilai atribut } h \text{ pada data tetangga } j
 \end{split}\]</div>
 <p>Metode WKNN memanfaatkan nilai kemiripan antar data untuk memperkirakan nilai yang hilang sehingga nilai yang dihasilkan lebih mendekati kondisi data sebenarnya.</p>
 <section id="dataset-yang-digunakan">
-<h3>Dataset yang digunakan<a class="headerlink" href="#dataset-yang-digunakan" title="Link to this heading">#</a></h3>
+<h4>Dataset yang digunakan<a class="headerlink" href="#dataset-yang-digunakan" title="Link to this heading">#</a></h4>
 <p>Pada tugas ini digunakan dataset dari platform Kaggle yaitu Boston Housing Dataset <a class="reference external" href="https://www.kaggle.com/datasets/altavish/boston-housing-dataset">https://www.kaggle.com/datasets/altavish/boston-housing-dataset</a>.</p>
 <p>Dataset Boston Housing merupakan dataset yang berisi informasi mengenai berbagai karakteristik wilayah perumahan di kota Boston, Amerika Serikat. Dataset ini sering digunakan dalam penelitian maupun pembelajaran machine learning untuk memprediksi harga rumah berdasarkan berbagai faktor lingkungan dan sosial ekonomi.</p>
 <p>Dataset ini terdiri dari beberapa atribut yang menggambarkan kondisi lingkungan, tingkat ekonomi, serta karakteristik rumah di suatu wilayah.</p>
 </section>
 <section id="penjelasan-kolom-pada-dataset">
-<h3>Penjelasan Kolom pada Dataset<a class="headerlink" href="#penjelasan-kolom-pada-dataset" title="Link to this heading">#</a></h3>
+<h4>Penjelasan Kolom pada Dataset<a class="headerlink" href="#penjelasan-kolom-pada-dataset" title="Link to this heading">#</a></h4>
 <p>Dataset yang digunakan pada penelitian ini adalah <strong>Boston Housing Dataset</strong> yang diperoleh dari platform Kaggle. Dataset ini berisi berbagai atribut yang menggambarkan kondisi lingkungan, sosial ekonomi, serta karakteristik wilayah perumahan di kota Boston. Setiap kolom pada dataset memiliki arti sebagai berikut:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -558,14 +560,14 @@ y_{jh} &amp;= \text{nilai atribut } h \text{ pada data tetangga } j
 </section>
 </section>
 <section id="perhitungan-wknn-manual">
-<h2>1.1. Perhitungan WKNN Manual<a class="headerlink" href="#perhitungan-wknn-manual" title="Link to this heading">#</a></h2>
+<h3>1.1. Perhitungan WKNN Manual<a class="headerlink" href="#perhitungan-wknn-manual" title="Link to this heading">#</a></h3>
 <section id="menentukan-data-yang-memiliki-missing-value">
-<h3>1.1.1 Menentukan Data yang Memiliki Missing Value<a class="headerlink" href="#menentukan-data-yang-memiliki-missing-value" title="Link to this heading">#</a></h3>
+<h4>1.1.1 Menentukan Data yang Memiliki Missing Value<a class="headerlink" href="#menentukan-data-yang-memiliki-missing-value" title="Link to this heading">#</a></h4>
 <p>Langkah pertama adalah mengidentifikasi baris data yang memiliki nilai yang hilang (missing value).<br />
 Pada dataset Boston Housing, terdapat missing value pada atribut <strong>LSTAT</strong> yang akan dihitung menggunakan metode WKNN.</p>
 </section>
 <section id="menentukan-kolom-yang-akan-dinormalisasi">
-<h3>1.1.2  Menentukan Kolom yang Akan Dinormalisasi<a class="headerlink" href="#menentukan-kolom-yang-akan-dinormalisasi" title="Link to this heading">#</a></h3>
+<h4>1.1.2  Menentukan Kolom yang Akan Dinormalisasi<a class="headerlink" href="#menentukan-kolom-yang-akan-dinormalisasi" title="Link to this heading">#</a></h4>
 <p>Sebelum menghitung similarity, dilakukan normalisasi data agar semua atribut memiliki skala yang sama.<br />
 Kolom yang dinormalisasi adalah:</p>
 <ul class="simple">
@@ -583,7 +585,7 @@ Kolom yang dinormalisasi adalah:</p>
 <p>Sedangkan kolom <strong>CHAS</strong> dan <strong>RAD</strong> tidak dinormalisasi karena merupakan variabel kategori atau indeks.</p>
 </section>
 <section id="melakukan-normalisasi-data">
-<h3>1.1.3 Melakukan Normalisasi Data<a class="headerlink" href="#melakukan-normalisasi-data" title="Link to this heading">#</a></h3>
+<h4>1.1.3 Melakukan Normalisasi Data<a class="headerlink" href="#melakukan-normalisasi-data" title="Link to this heading">#</a></h4>
 <p>Normalisasi dilakukan menggunakan metode <strong>Min-Max Normalization</strong> dengan rumus:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -639,7 +641,7 @@ x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}}
 <img alt="original image" src="https://cdn.mathpix.com/snip/images/UvuF5Ik6z5AOPY_A853praI5dIYgojz-JdF5edkKu9I.original.fullsize.png" /></p>
 </section>
 <section id="menghitung-similarity-si">
-<h3>1.1.4 Menghitung Similarity (Si)<a class="headerlink" href="#menghitung-similarity-si" title="Link to this heading">#</a></h3>
+<h4>1.1.4 Menghitung Similarity (Si)<a class="headerlink" href="#menghitung-similarity-si" title="Link to this heading">#</a></h4>
 <p>Setelah semua data dinormalisasi, langkah selanjutnya adalah menghitung nilai similarity antara data yang memiliki missing value dengan data lainnya.</p>
 <p>Rumus similarity yang digunakan adalah:</p>
 <div class="math notranslate nohighlight">
@@ -666,7 +668,7 @@ S_i = \frac{1}{\sum (Y_{ih} - Y_{jh})^2}
 </div>
 </section>
 <section id="menghitung-penyebut-si">
-<h3>1.1.5 Menghitung Penyebut (ΣSi)<a class="headerlink" href="#menghitung-penyebut-si" title="Link to this heading">#</a></h3>
+<h4>1.1.5 Menghitung Penyebut (ΣSi)<a class="headerlink" href="#menghitung-penyebut-si" title="Link to this heading">#</a></h4>
 <p>Nilai similarity kemudian dijumlahkan untuk mendapatkan nilai penyebut pada rumus imputasi.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -678,7 +680,7 @@ S_i = \frac{1}{\sum (Y_{ih} - Y_{jh})^2}
 \]</div>
 </section>
 <section id="menghitung-pembilang-si-yjh">
-<h3>1.1.6 Menghitung Pembilang (Si × Yjh)<a class="headerlink" href="#menghitung-pembilang-si-yjh" title="Link to this heading">#</a></h3>
+<h4>1.1.6 Menghitung Pembilang (Si × Yjh)<a class="headerlink" href="#menghitung-pembilang-si-yjh" title="Link to this heading">#</a></h4>
 <p>Selanjutnya dihitung perkalian antara nilai similarity dengan nilai atribut dari tetangga terdekat.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -719,7 +721,7 @@ S_i \times Y_{jh}
 \]</div>
 </section>
 <section id="hasil-nilai-imputasi">
-<h3>1.1.7 Hasil Nilai Imputasi<a class="headerlink" href="#hasil-nilai-imputasi" title="Link to this heading">#</a></h3>
+<h4>1.1.7 Hasil Nilai Imputasi<a class="headerlink" href="#hasil-nilai-imputasi" title="Link to this heading">#</a></h4>
 <p>Nilai imputasi diperoleh dengan membagi pembilang dengan penyebut:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -734,7 +736,7 @@ S_i \times Y_{jh}
 </section>
 </section>
 <section id="perhitungan-wknn-menggunakan-python">
-<h2>1.2 Perhitungan WKNN menggunakan Python<a class="headerlink" href="#perhitungan-wknn-menggunakan-python" title="Link to this heading">#</a></h2>
+<h3>1.2 Perhitungan WKNN menggunakan Python<a class="headerlink" href="#perhitungan-wknn-menggunakan-python" title="Link to this heading">#</a></h3>
 <p>Selain melakukan perhitungan secara manual menggunakan Microsoft Excel, proses imputasi missing value juga dilakukan menggunakan bahasa pemrograman Python. Implementasi ini bertujuan untuk memverifikasi hasil perhitungan manual serta mempermudah proses pengolahan data.</p>
 <p>Library yang digunakan dalam proses ini adalah:</p>
 <ul class="simple">
@@ -743,7 +745,7 @@ S_i \times Y_{jh}
 <li><p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code> untuk membantu proses normalisasi data</p></li>
 </ul>
 <section id="mengunggah-dan-membaca-dataset">
-<h3>1. Mengunggah dan Membaca Dataset<a class="headerlink" href="#mengunggah-dan-membaca-dataset" title="Link to this heading">#</a></h3>
+<h4>1. Mengunggah dan Membaca Dataset<a class="headerlink" href="#mengunggah-dan-membaca-dataset" title="Link to this heading">#</a></h4>
 <p>Dataset terlebih dahulu diunggah ke Google Colab kemudian dibaca menggunakan library <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
 <span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
@@ -855,8 +857,8 @@ S_i \times Y_{jh}
 </table>
 </div>
 </section>
-<section id="id2">
-<h3>2.Menentukan Kolom yang Akan Dinormalisasi<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h4>2.Menentukan Kolom yang Akan Dinormalisasi<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
 <p>Pada tahap ini ditentukan atribut yang akan digunakan dalam proses normalisasi.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cols_norm</span> <span class="o">=</span> <span class="p">[</span>
 <span class="s1">&#39;CRIM&#39;</span><span class="p">,</span><span class="s1">&#39;INDUS&#39;</span><span class="p">,</span><span class="s1">&#39;NOX&#39;</span><span class="p">,</span><span class="s1">&#39;RM&#39;</span><span class="p">,</span><span class="s1">&#39;AGE&#39;</span><span class="p">,</span>
@@ -907,8 +909,8 @@ S_i \times Y_{jh}
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h3>3. Melakukan Normalisasi Data<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h4>3. Melakukan Normalisasi Data<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
 <p>Normalisasi dilakukan menggunakan metode Min-Max Normalization</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df_norm</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -937,8 +939,8 @@ S_i \times Y_{jh}
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h3>4. Menentukan Data yang Memiliki Missing Value<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h4>4. Menentukan Data yang Memiliki Missing Value<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
 <p>Selanjutnya dilakukan identifikasi data yang memiliki nilai kosong pada atribut LSTAT.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">missing_index</span> <span class="o">=</span> <span class="n">df_norm</span><span class="p">[</span><span class="n">df_norm</span><span class="p">[</span><span class="s1">&#39;LSTAT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">index</span>
 <span class="n">row_missing</span> <span class="o">=</span> <span class="n">df_norm</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">missing_index</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LSTAT&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -948,7 +950,7 @@ S_i \times Y_{jh}
 </div>
 </section>
 <section id="menghitung-nilai-similarity-si">
-<h3>5. Menghitung Nilai Similarity (Si)<a class="headerlink" href="#menghitung-nilai-similarity-si" title="Link to this heading">#</a></h3>
+<h4>5. Menghitung Nilai Similarity (Si)<a class="headerlink" href="#menghitung-nilai-similarity-si" title="Link to this heading">#</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Si</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">Yjh</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -972,7 +974,7 @@ S_i \times Y_{jh}
 </div>
 </section>
 <section id="menghitung-penyebut">
-<h3>6. Menghitung Penyebut<a class="headerlink" href="#menghitung-penyebut" title="Link to this heading">#</a></h3>
+<h4>6. Menghitung Penyebut<a class="headerlink" href="#menghitung-penyebut" title="Link to this heading">#</a></h4>
 <p>Penyebut diperoleh dari jumlah seluruh nilai similarity.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">penyebut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Si</span><span class="p">)</span>
 
@@ -987,7 +989,7 @@ S_i \times Y_{jh}
 </div>
 </section>
 <section id="menghitung-pembilang">
-<h3>7. Menghitung Pembilang<a class="headerlink" href="#menghitung-pembilang" title="Link to this heading">#</a></h3>
+<h4>7. Menghitung Pembilang<a class="headerlink" href="#menghitung-pembilang" title="Link to this heading">#</a></h4>
 <p>Pembilang diperoleh dari hasil perkalian similarity dengan nilai atribut tetangga.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Si_Yjh</span> <span class="o">=</span> <span class="n">Si</span> <span class="o">*</span> <span class="n">Yjh</span>
 
@@ -1009,7 +1011,7 @@ S_i \times Y_{jh}
 </div>
 </section>
 <section id="menghitung-nilai-imputasi">
-<h3>8. Menghitung Nilai Imputasi<a class="headerlink" href="#menghitung-nilai-imputasi" title="Link to this heading">#</a></h3>
+<h4>8. Menghitung Nilai Imputasi<a class="headerlink" href="#menghitung-nilai-imputasi" title="Link to this heading">#</a></h4>
 <p>Nilai imputasi dihitung menggunakan rumus Weighted K-Nearest</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hasil</span> <span class="o">=</span> <span class="n">pembilang</span> <span class="o">/</span> <span class="n">penyebut</span>
 
@@ -1026,13 +1028,13 @@ S_i \times Y_{jh}
 </section>
 </section>
 <section id="normalisasi-data">
-<h1>2. Normalisasi data<a class="headerlink" href="#normalisasi-data" title="Link to this heading">#</a></h1>
+<h2>2. Normalisasi data<a class="headerlink" href="#normalisasi-data" title="Link to this heading">#</a></h2>
 <p>Normalisasi data adalah proses mengubah skala nilai pada data sehingga berada pada rentang tertentu agar semua variabel memiliki skala yang sebanding. Normalisasi biasanya dilakukan pada tahap preprocessing data sebelum proses analisis atau pemodelan machine learning.</p>
 <p>Tujuan normalisasi data adalah untuk menghindari dominasi nilai dari suatu variabel yang memiliki skala lebih besar dibandingkan variabel lainnya. Dengan normalisasi, setiap fitur dalam dataset dapat memberikan kontribusi yang seimbang dalam proses perhitungan.</p>
 <section id="macam-macam-normalisasi-data">
-<h2>2.1 Macam-macam Normalisasi Data<a class="headerlink" href="#macam-macam-normalisasi-data" title="Link to this heading">#</a></h2>
+<h3>2.1 Macam-macam Normalisasi Data<a class="headerlink" href="#macam-macam-normalisasi-data" title="Link to this heading">#</a></h3>
 <section id="minmax-normalization">
-<h3>1. MinMax Normalization<a class="headerlink" href="#minmax-normalization" title="Link to this heading">#</a></h3>
+<h4>1. MinMax Normalization<a class="headerlink" href="#minmax-normalization" title="Link to this heading">#</a></h4>
 <p>Min-Max Normalization adalah metode normalisasi yang mengubah nilai data ke dalam rentang tertentu, biasanya antara 0 hingga 1.</p>
 <p>Rumus Min-Max Normalization:</p>
 <div class="math notranslate nohighlight">
@@ -1105,7 +1107,7 @@ x' = 0.201
 </div>
 </section>
 <section id="z-score-normalization">
-<h3>2. Z-Score Normalization<a class="headerlink" href="#z-score-normalization" title="Link to this heading">#</a></h3>
+<h4>2. Z-Score Normalization<a class="headerlink" href="#z-score-normalization" title="Link to this heading">#</a></h4>
 <p>Z-Score Normalization atau standardization adalah metode normalisasi yang menggunakan nilai rata-rata (mean) dan standar deviasi dari data.
 Rumus Z-Score Normalization:</p>
 <div class="math notranslate nohighlight">
@@ -1139,7 +1141,7 @@ Menggunakan data yang sama pada kolom <strong>RM</strong>:</p>
 </table>
 </div>
 <section id="menghitung-rata-rata">
-<h4>Menghitung Rata-rata<a class="headerlink" href="#menghitung-rata-rata" title="Link to this heading">#</a></h4>
+<h5>Menghitung Rata-rata<a class="headerlink" href="#menghitung-rata-rata" title="Link to this heading">#</a></h5>
 <p>Rumus mean:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1160,7 +1162,7 @@ Menggunakan data yang sama pada kolom <strong>RM</strong>:</p>
 \]</div>
 </section>
 <section id="menghitung-standar-deviasi">
-<h4>Menghitung Standar Deviasi<a class="headerlink" href="#menghitung-standar-deviasi" title="Link to this heading">#</a></h4>
+<h5>Menghitung Standar Deviasi<a class="headerlink" href="#menghitung-standar-deviasi" title="Link to this heading">#</a></h5>
 <p>Rumus standar deviasi:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1235,7 +1237,7 @@ x' = -0.4606
 </section>
 </section>
 <section id="decimal-scaling-normalization">
-<h3>3. Decimal Scaling Normalization<a class="headerlink" href="#decimal-scaling-normalization" title="Link to this heading">#</a></h3>
+<h4>3. Decimal Scaling Normalization<a class="headerlink" href="#decimal-scaling-normalization" title="Link to this heading">#</a></h4>
 <p>Decimal Scaling Normalization adalah metode normalisasi dengan cara memindahkan titik desimal dari nilai data.
 Rumus Decimal Scaling:</p>
 <div class="math notranslate nohighlight">
@@ -1309,12 +1311,12 @@ x' = 0.6575
 </section>
 </section>
 <section id="normalisasi-data-menggunakan-sk-learn">
-<h2>2.2 Normalisasi Data Menggunakan SK_Learn<a class="headerlink" href="#normalisasi-data-menggunakan-sk-learn" title="Link to this heading">#</a></h2>
+<h3>2.2 Normalisasi Data Menggunakan SK_Learn<a class="headerlink" href="#normalisasi-data-menggunakan-sk-learn" title="Link to this heading">#</a></h3>
 <p>Selain melakukan perhitungan normalisasi secara manual, normalisasi data juga dapat dilakukan menggunakan library Python yaitu <strong>scikit-learn (sklearn)</strong>. Library ini menyediakan berbagai fungsi preprocessing data yang memudahkan proses normalisasi sebelum data digunakan dalam proses analisis atau machine learning.</p>
 <p>Pada contoh berikut digunakan sebagian data dari <strong>Boston Housing Dataset</strong> pada kolom <strong>RM</strong>.</p>
 </section>
 <section id="data-awal">
-<h2>Data Awal<a class="headerlink" href="#data-awal" title="Link to this heading">#</a></h2>
+<h3>Data Awal<a class="headerlink" href="#data-awal" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>RM</p></th>
@@ -1331,7 +1333,7 @@ x' = 0.6575
 </table>
 </div>
 <section id="min-max-normalization-menggunakan-sklearn">
-<h3>1. Min-Max Normalization menggunakan sklearn<a class="headerlink" href="#min-max-normalization-menggunakan-sklearn" title="Link to this heading">#</a></h3>
+<h4>1. Min-Max Normalization menggunakan sklearn<a class="headerlink" href="#min-max-normalization-menggunakan-sklearn" title="Link to this heading">#</a></h4>
 <p>Min-Max Normalization dapat dilakukan menggunakan <strong>MinMaxScaler</strong> dari sklearn.</p>
 <p><strong>Kode Python</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1369,7 +1371,7 @@ x' = 0.6575
 </div>
 </section>
 <section id="z-score-normalization-menggunakan-sklearn">
-<h3>2. Z-Score Normalization menggunakan sklearn<a class="headerlink" href="#z-score-normalization-menggunakan-sklearn" title="Link to this heading">#</a></h3>
+<h4>2. Z-Score Normalization menggunakan sklearn<a class="headerlink" href="#z-score-normalization-menggunakan-sklearn" title="Link to this heading">#</a></h4>
 <p>Z-Score Normalization dapat dilakukan menggunakan <strong>StandardScaler</strong> dari sklearn.</p>
 <p><strong>Kode Python</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -1403,7 +1405,7 @@ x' = 0.6575
 </div>
 </section>
 <section id="decimal-scaling-menggunakan-python">
-<h3>3. Decimal Scaling menggunakan Python<a class="headerlink" href="#decimal-scaling-menggunakan-python" title="Link to this heading">#</a></h3>
+<h4>3. Decimal Scaling menggunakan Python<a class="headerlink" href="#decimal-scaling-menggunakan-python" title="Link to this heading">#</a></h4>
 <p>Library sklearn tidak menyediakan fungsi khusus untuk Decimal Scaling. Oleh karena itu normalisasi ini dapat dilakukan dengan perhitungan sederhana menggunakan Python.
 <strong>Kode Python</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1441,6 +1443,7 @@ x' = 0.6575
 </table>
 </div>
 <p>Berdasarkan hasil implementasi menggunakan sklearn, nilai normalisasi yang dihasilkan sama dengan perhitungan manual sebelumnya. Hal ini menunjukkan bahwa library sklearn dapat digunakan untuk mempermudah proses normalisasi data secara otomatis.</p>
+</section>
 </section>
 </section>
 </section>
@@ -1511,61 +1514,60 @@ x' = 0.6575
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Missing Value Imputation dengan WKNN</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-metode-wknn">Langkah-langkah metode WKNN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-similarity-pada-wknn">Rumus Similarity pada WKNN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-simbol">Keterangan simbol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-perhitungan-nilai-imputasi">Rumus Perhitungan Nilai Imputasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Keterangan simbol</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-yang-digunakan">Dataset yang digunakan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kolom-pada-dataset">Penjelasan Kolom pada Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Missing Value Imputation dengan WKNN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-metode-wknn">Langkah-langkah metode WKNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-similarity-pada-wknn">Rumus Similarity pada WKNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keterangan-simbol">Keterangan simbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-perhitungan-nilai-imputasi">Rumus Perhitungan Nilai Imputasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Keterangan simbol</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-yang-digunakan">Dataset yang digunakan</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kolom-pada-dataset">Penjelasan Kolom pada Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-manual">1.1. Perhitungan WKNN Manual</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-data-yang-memiliki-missing-value">1.1.1 Menentukan Data yang Memiliki Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kolom-yang-akan-dinormalisasi">1.1.2  Menentukan Kolom yang Akan Dinormalisasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melakukan-normalisasi-data">1.1.3 Melakukan Normalisasi Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-similarity-si">1.1.4 Menghitung Similarity (Si)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut-si">1.1.5 Menghitung Penyebut (ΣSi)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang-si-yjh">1.1.6 Menghitung Pembilang (Si × Yjh)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-nilai-imputasi">1.1.7 Hasil Nilai Imputasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-manual">1.1. Perhitungan WKNN Manual</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-data-yang-memiliki-missing-value">1.1.1 Menentukan Data yang Memiliki Missing Value</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-kolom-yang-akan-dinormalisasi">1.1.2  Menentukan Kolom yang Akan Dinormalisasi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#melakukan-normalisasi-data">1.1.3 Melakukan Normalisasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-similarity-si">1.1.4 Menghitung Similarity (Si)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut-si">1.1.5 Menghitung Penyebut (ΣSi)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang-si-yjh">1.1.6 Menghitung Pembilang (Si × Yjh)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-nilai-imputasi">1.1.7 Hasil Nilai Imputasi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-menggunakan-python">1.2 Perhitungan WKNN menggunakan Python</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengunggah-dan-membaca-dataset">1. Mengunggah dan Membaca Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.Menentukan Kolom yang Akan Dinormalisasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. Melakukan Normalisasi Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. Menentukan Data yang Memiliki Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-similarity-si">5. Menghitung Nilai Similarity (Si)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut">6. Menghitung Penyebut</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang">7. Menghitung Pembilang</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-imputasi">8. Menghitung Nilai Imputasi</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">2. Normalisasi data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macam-macam-normalisasi-data">2.1 Macam-macam Normalisasi Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minmax-normalization">1. MinMax Normalization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization">2. Z-Score Normalization</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-rata-rata">Menghitung Rata-rata</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-standar-deviasi">Menghitung Standar Deviasi</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-normalization">3. Decimal Scaling Normalization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-menggunakan-sk-learn">2.2 Normalisasi Data Menggunakan SK_Learn</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-awal">Data Awal</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization-menggunakan-sklearn">1. Min-Max Normalization menggunakan sklearn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization-menggunakan-sklearn">2. Z-Score Normalization menggunakan sklearn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-menggunakan-python">3. Decimal Scaling menggunakan Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-wknn-menggunakan-python">1.2 Perhitungan WKNN menggunakan Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mengunggah-dan-membaca-dataset">1. Mengunggah dan Membaca Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.Menentukan Kolom yang Akan Dinormalisasi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3. Melakukan Normalisasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4. Menentukan Data yang Memiliki Missing Value</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-similarity-si">5. Menghitung Nilai Similarity (Si)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-penyebut">6. Menghitung Penyebut</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-pembilang">7. Menghitung Pembilang</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-nilai-imputasi">8. Menghitung Nilai Imputasi</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">2. Normalisasi data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macam-macam-normalisasi-data">2.1 Macam-macam Normalisasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#minmax-normalization">1. MinMax Normalization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization">2. Z-Score Normalization</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-rata-rata">Menghitung Rata-rata</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-standar-deviasi">Menghitung Standar Deviasi</a></li>
 </ul>
-
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-normalization">3. Decimal Scaling Normalization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-menggunakan-sk-learn">2.2 Normalisasi Data Menggunakan SK_Learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-awal">Data Awal</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization-menggunakan-sklearn">1. Min-Max Normalization menggunakan sklearn</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization-menggunakan-sklearn">2. Z-Score Normalization menggunakan sklearn</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-menggunakan-python">3. Decimal Scaling menggunakan Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
   </nav></div>
 
 </div></div>

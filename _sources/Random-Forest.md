@@ -1,3 +1,4 @@
+# Random Forest
 ## Analisis Data Menggunakan Random Forest
 
 Pada tugas ini dilakukan analisis data menggunakan metode Decision Tree dan Random Forest pada dataset diabetes. Tujuannya adalah membandingkan performa kedua algoritma dalam melakukan klasifikasi data diabetes berdasarkan nilai akurasi yang dihasilkan.
