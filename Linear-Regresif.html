@@ -378,6 +378,18 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#library-yang-digunakan">3. Library yang Digunakan</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-code-program">4. Source Code Program</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-program">5. Hasil Program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-menggunakan-matriks">6. Perhitungan Manual Menggunakan Matriks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-x">Matriks X</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-y">Matriks Y</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-x-tx">Menghitung <span class="math notranslate nohighlight">\(X^TX\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-invers-matriks">Menghitung Invers Matriks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-x-ty">Menghitung <span class="math notranslate nohighlight">\(X^TY\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-koefisien-regresi">Menghitung Koefisien Regresi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persamaan-regresi">Persamaan Regresi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-prediksi">Contoh Prediksi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-menggunakan-geogebra">7.Visualisasi Menggunakan GeoGebra</a></li>
 </ul>
             </nav>
         </div>
@@ -571,6 +583,229 @@ y = b_0 + b_1x
 <li><p>Jika x = 2,  maka model regresi memprediksi nilai Y sebesar 2.5.</p></li>
 </ul>
 </section>
+<section id="perhitungan-manual-menggunakan-matriks">
+<h2>6. Perhitungan Manual Menggunakan Matriks<a class="headerlink" href="#perhitungan-manual-menggunakan-matriks" title="Link to this heading">#</a></h2>
+<p>Koefisien regresi linier dapat dihitung menggunakan persamaan matriks:</p>
+<div class="math notranslate nohighlight">
+\[
+B = (X^TX)^{-1}X^TY
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(B\)</span> = vektor koefisien regresi</p></li>
+<li><p><span class="math notranslate nohighlight">\(X^T\)</span> = transpose matriks <span class="math notranslate nohighlight">\(X\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((X^TX)^{-1}\)</span> = invers matriks</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> = matriks target/output</p></li>
+</ul>
+<p>Bentuk vektor koefisien regresi:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+B =
+\begin{bmatrix}
+b_0 \\
+b_1
+\end{bmatrix}
+\end{split}\]</div>
+<p>Dengan:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(b_0\)</span> = intercept</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_1\)</span> = koefisien regresi</p></li>
+</ul>
+<section id="matriks-x">
+<h3>Matriks X<a class="headerlink" href="#matriks-x" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X =
+\begin{bmatrix}
+1 &amp; 2 \\
+1 &amp; 4 \\
+1 &amp; 3 \\
+1 &amp; 3 \\
+1 &amp; 3 \\
+1 &amp; 4 \\
+1 &amp; 5
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="matriks-y">
+<h3>Matriks Y<a class="headerlink" href="#matriks-y" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y =
+\begin{bmatrix}
+2 \\
+3 \\
+5 \\
+4 \\
+3 \\
+5 \\
+6
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="menghitung-x-tx">
+<h3>Menghitung <span class="math notranslate nohighlight">\(X^TX\)</span><a class="headerlink" href="#menghitung-x-tx" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X^TX =
+\begin{bmatrix}
+7 &amp; 24 \\
+24 &amp; 88
+\end{bmatrix}
+\end{split}\]</div>
+<p>Penjelasan:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X^TX =
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+2 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; 4 &amp; 5
+\end{bmatrix}
+\begin{bmatrix}
+1 &amp; 2 \\
+1 &amp; 4 \\
+1 &amp; 3 \\
+1 &amp; 3 \\
+1 &amp; 3 \\
+1 &amp; 4 \\
+1 &amp; 5
+\end{bmatrix}
+\end{split}\]</div>
+<p>Hasil perkalian:</p>
+<p><span class="math notranslate nohighlight">\(\begin{bmatrix}
+7 &amp; 24 \\
+24 &amp; 88
+\end{bmatrix}\)</span></p>
+</section>
+<section id="menghitung-invers-matriks">
+<h3>Menghitung Invers Matriks<a class="headerlink" href="#menghitung-invers-matriks" title="Link to this heading">#</a></h3>
+<p>Determinan matriks:</p>
+<p><span class="math notranslate nohighlight">\((7 \times 88) - (24 \times 24)\)</span></p>
+<p><span class="math notranslate nohighlight">\(= 616 - 576\)</span></p>
+<p><span class="math notranslate nohighlight">\(= 40\)</span></p>
+<p>Maka invers matriks:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} (X^TX)^{-1} = \frac{1}{40} \left[ \begin{array}{cc} 88 &amp; -24 \\ -24 &amp; 7 \end{array} \right] \end{split}\]</div>
+</section>
+<section id="menghitung-x-ty">
+<h3>Menghitung <span class="math notranslate nohighlight">\(X^TY\)</span><a class="headerlink" href="#menghitung-x-ty" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X^TY =
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+2 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; 4 &amp; 5
+\end{bmatrix}
+\begin{bmatrix}
+2 \\
+3 \\
+5 \\
+4 \\
+3 \\
+5 \\
+6
+\end{bmatrix}
+\end{split}\]</div>
+<p>Hasil:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X^TY =
+\begin{bmatrix}
+28 \\
+102
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="menghitung-koefisien-regresi">
+<h3>Menghitung Koefisien Regresi<a class="headerlink" href="#menghitung-koefisien-regresi" title="Link to this heading">#</a></h3>
+<p>Substitusi ke persamaan regresi:</p>
+<div class="math notranslate nohighlight">
+\[ B = (X^TX)^{-1}X^TY \]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} B = \frac{1}{40} \left[ \begin{array}{cc} 88 &amp; -24 \\ -24 &amp; 7 \end{array} \right] \left[ \begin{array}{c} 28 \\ 102 \end{array} \right] \end{split}\]</div>
+<p>Hasil perkalian:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} = \frac{1}{40} \left[ \begin{array}{c} 16 \\ 42 \end{array} \right] \end{split}\]</div>
+<p>Hasil akhir:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+B =
+\begin{bmatrix}
+0.4 \\
+1.05
+\end{bmatrix}
+\end{split}\]</div>
+<p>Sehingga diperoleh:</p>
+<div class="math notranslate nohighlight">
+\[
+b_0 = 0.4
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+b_1 = 1.05
+\]</div>
+</section>
+<section id="persamaan-regresi">
+<h3>Persamaan Regresi<a class="headerlink" href="#persamaan-regresi" title="Link to this heading">#</a></h3>
+<p>Persamaan regresi linier yang diperoleh:</p>
+<div class="math notranslate nohighlight">
+\[
+y = 1.05x + 0.4
+\]</div>
+<p>Keterangan:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(1.05\)</span> adalah koefisien regresi (<span class="math notranslate nohighlight">\(b_1\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(0.4\)</span> adalah intercept (<span class="math notranslate nohighlight">\(b_0\)</span>)</p></li>
+</ul>
+</section>
+<section id="contoh-prediksi">
+<h3>Contoh Prediksi<a class="headerlink" href="#contoh-prediksi" title="Link to this heading">#</a></h3>
+<p>Jika:</p>
+<div class="math notranslate nohighlight">
+\[
+x = 2
+\]</div>
+<p>Maka:</p>
+<div class="math notranslate nohighlight">
+\[
+y = 1.05(2) + 0.4
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= 2.1 + 0.4
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= 2.5
+\]</div>
+<p>Artinya ketika nilai <span class="math notranslate nohighlight">\(x = 2\)</span>, model memprediksi nilai <span class="math notranslate nohighlight">\(y = 2.5\)</span>.</p>
+</section>
+</section>
+<section id="visualisasi-menggunakan-geogebra">
+<h2>7.Visualisasi Menggunakan GeoGebra<a class="headerlink" href="#visualisasi-menggunakan-geogebra" title="Link to this heading">#</a></h2>
+<p>Berikut merupakan visualisasi regresi linier menggunakan GeoGebra berdasarkan data yang digunakan.</p>
+<p><img alt="original image" src="https://cdn.mathpix.com/snip/images/c_irT0s0yk4RBdUmn8R3uF9B5FNrVoxlwS_E2WC3vvQ.original.fullsize.png" /></p>
+<p>Penjelasan:</p>
+<ul class="simple">
+<li><p>Titik biru menunjukkan data asli.</p></li>
+<li><p>Garis hitam menunjukkan garis regresi linier.</p></li>
+<li><p>Persamaan garis regresi yang diperoleh adalah:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y = 1.05x + 0.4
+\]</div>
+<ul class="simple">
+<li><p>Garis regresi memiliki arah positif, sehingga menunjukkan bahwa variabel <span class="math notranslate nohighlight">\(x\)</span> dan <span class="math notranslate nohighlight">\(y\)</span> memiliki hubungan positif.</p></li>
+<li><p>Semakin besar nilai <span class="math notranslate nohighlight">\(x\)</span>, maka nilai <span class="math notranslate nohighlight">\(y\)</span> cenderung meningkat.</p></li>
+<li><p>Titik <span class="math notranslate nohighlight">\(H\)</span> menunjukkan intercept sebesar <span class="math notranslate nohighlight">\(0.4\)</span> pada sumbu-<span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>Titik <span class="math notranslate nohighlight">\(I\)</span> menunjukkan hasil prediksi saat <span class="math notranslate nohighlight">\(x = 2\)</span>, yaitu:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y = 2.5
+\]</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -635,6 +870,18 @@ y = b_0 + b_1x
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#library-yang-digunakan">3. Library yang Digunakan</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-code-program">4. Source Code Program</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-program">5. Hasil Program</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-manual-menggunakan-matriks">6. Perhitungan Manual Menggunakan Matriks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-x">Matriks X</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-y">Matriks Y</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-x-tx">Menghitung <span class="math notranslate nohighlight">\(X^TX\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-invers-matriks">Menghitung Invers Matriks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-x-ty">Menghitung <span class="math notranslate nohighlight">\(X^TY\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-koefisien-regresi">Menghitung Koefisien Regresi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persamaan-regresi">Persamaan Regresi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-prediksi">Contoh Prediksi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-menggunakan-geogebra">7.Visualisasi Menggunakan GeoGebra</a></li>
 </ul>
   </nav></div>
 

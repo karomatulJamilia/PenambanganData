@@ -157,3 +157,241 @@ Penjelasan:
 - Nilai $b_0 = 0.4$ merupakan titik potong garis regresi terhadap sumbu-Y.
 - Jika x = 2,  maka model regresi memprediksi nilai Y sebesar 2.5.
 
+## 6. Perhitungan Manual Menggunakan Matriks
+
+Koefisien regresi linier dapat dihitung menggunakan persamaan matriks:
+
+$$
+B = (X^TX)^{-1}X^TY
+$$
+
+Keterangan:
+
+- $B$ = vektor koefisien regresi
+- $X^T$ = transpose matriks $X$
+- $(X^TX)^{-1}$ = invers matriks
+- $Y$ = matriks target/output
+
+Bentuk vektor koefisien regresi:
+
+$$
+B =
+\begin{bmatrix}
+b_0 \\
+b_1
+\end{bmatrix}
+$$
+
+Dengan:
+
+- $b_0$ = intercept
+- $b_1$ = koefisien regresi
+
+### Matriks X
+
+$$
+X =
+\begin{bmatrix}
+1 & 2 \\
+1 & 4 \\
+1 & 3 \\
+1 & 3 \\
+1 & 3 \\
+1 & 4 \\
+1 & 5
+\end{bmatrix}
+$$
+
+### Matriks Y
+
+$$
+Y =
+\begin{bmatrix}
+2 \\
+3 \\
+5 \\
+4 \\
+3 \\
+5 \\
+6
+\end{bmatrix}
+$$
+
+### Menghitung $X^TX$
+
+$$
+X^TX =
+\begin{bmatrix}
+7 & 24 \\
+24 & 88
+\end{bmatrix}
+$$
+
+Penjelasan:
+
+$$
+X^TX =
+\begin{bmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+2 & 4 & 3 & 3 & 3 & 4 & 5
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 \\
+1 & 4 \\
+1 & 3 \\
+1 & 3 \\
+1 & 3 \\
+1 & 4 \\
+1 & 5
+\end{bmatrix}
+$$
+
+Hasil perkalian:
+
+
+
+$\begin{bmatrix}
+7 & 24 \\
+24 & 88
+\end{bmatrix}$
+
+
+### Menghitung Invers Matriks
+
+Determinan matriks:
+
+
+$(7 \times 88) - (24 \times 24)$
+
+
+
+$= 616 - 576$
+
+$= 40$
+
+Maka invers matriks:
+
+$$ (X^TX)^{-1} = \frac{1}{40} \left[ \begin{array}{cc} 88 & -24 \\ -24 & 7 \end{array} \right] $$
+
+### Menghitung $X^TY$
+
+$$
+X^TY =
+\begin{bmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+2 & 4 & 3 & 3 & 3 & 4 & 5
+\end{bmatrix}
+\begin{bmatrix}
+2 \\
+3 \\
+5 \\
+4 \\
+3 \\
+5 \\
+6
+\end{bmatrix}
+$$
+
+Hasil:
+
+$$
+X^TY =
+\begin{bmatrix}
+28 \\
+102
+\end{bmatrix}
+$$
+
+### Menghitung Koefisien Regresi
+
+Substitusi ke persamaan regresi:
+
+$$ B = (X^TX)^{-1}X^TY $$
+
+$$ B = \frac{1}{40} \left[ \begin{array}{cc} 88 & -24 \\ -24 & 7 \end{array} \right] \left[ \begin{array}{c} 28 \\ 102 \end{array} \right] $$
+
+Hasil perkalian:
+
+$$ = \frac{1}{40} \left[ \begin{array}{c} 16 \\ 42 \end{array} \right] $$
+Hasil akhir:
+
+$$
+B =
+\begin{bmatrix}
+0.4 \\
+1.05
+\end{bmatrix}
+$$
+
+Sehingga diperoleh:
+
+$$
+b_0 = 0.4
+$$
+
+$$
+b_1 = 1.05
+$$
+
+### Persamaan Regresi
+
+Persamaan regresi linier yang diperoleh:
+
+$$
+y = 1.05x + 0.4
+$$
+
+Keterangan:
+
+- $1.05$ adalah koefisien regresi ($b_1$)
+- $0.4$ adalah intercept ($b_0$)
+
+### Contoh Prediksi
+
+Jika:
+
+$$
+x = 2
+$$
+
+Maka:
+
+$$
+y = 1.05(2) + 0.4
+$$
+
+$$
+= 2.1 + 0.4
+$$
+
+$$
+= 2.5
+$$
+
+Artinya ketika nilai $x = 2$, model memprediksi nilai $y = 2.5$.
+
+##  7.Visualisasi Menggunakan GeoGebra
+
+Berikut merupakan visualisasi regresi linier menggunakan GeoGebra berdasarkan data yang digunakan.
+
+![original image](https://cdn.mathpix.com/snip/images/c_irT0s0yk4RBdUmn8R3uF9B5FNrVoxlwS_E2WC3vvQ.original.fullsize.png)
+
+
+Penjelasan:
+
+- Titik biru menunjukkan data asli.
+- Garis hitam menunjukkan garis regresi linier.
+- Persamaan garis regresi yang diperoleh adalah:
+
+$$
+y = 1.05x + 0.4
+$$
+
+- Garis regresi memiliki arah positif, sehingga menunjukkan bahwa variabel $x$ dan $y$ memiliki hubungan positif.
+- Semakin besar nilai $x$, maka nilai $y$ cenderung meningkat.
+- Titik $H$ menunjukkan intercept sebesar $0.4$ pada sumbu-$Y$.
+- Titik $I$ menunjukkan hasil prediksi saat $x = 2$, yaitu:
+
+$$
+y = 2.5
+$$
