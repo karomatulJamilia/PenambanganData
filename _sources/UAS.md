@@ -1,8 +1,8 @@
 # UAS
 
-Nama : Karomatul Jamilia
-NIM  : 240411100116
-Kelas: Penambangan Data B
+- Nama : Karomatul Jamilia
+- NIM  : 240411100116
+- Kelas: Penambangan Data B
 
 # Analisis Higher Education Students Performance Evaluation Menggunakan KNIME
 
